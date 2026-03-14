@@ -1,6 +1,10 @@
-// - WoordList
+// ─────────────────────────────────────────────
+// COOLWORDLE — script.js
+// ─────────────────────────────────────────────
+
+// ── Wordlist ──
 const ANSWERS = [
-  "womby","aalap","loser",
+  "womby","aalap","loser","lover","cherry","india",
   "cigar","rebut","sissy","humph","awake","bleed","kneed","grand","risen","reply",
   "alien","ramen","clink","hurry","beams","blade","timid","altar","arose","thump",
   "field","clung","abbot","whelp","shank","viola","quest","prose","valid","elder",
