@@ -1,5 +1,8 @@
+// ─────────────────────────────────────────────
+// COOLWORDLE — script.js
+// ─────────────────────────────────────────────
 
-// ── List of words
+// ── FULL NYT WORDLE ANSWER WORD LIST (2309 words) ──
 const ANSWERS = [
   "cigar","rebut","sissy","humph","awake","bleed","kneed","grand","risen","reply",
   "alien","ramen","clink","hurry","beams","blade","timid","altar","arose","thump",
@@ -239,14 +242,13 @@ const EXTRA_VALID = new Set([
   "arsis","artel","artic","artis","ascus","aspen","aster","astir","atilt","atlas",
   "atman","atmos","atomy","atony","atopy","atria","audit","auger","aught","aulas",
   "aulos","aunts","aurae","aural","auras","auric","auris","avail","avens","avers",
-  "aviso","avows","awned","axels","axile","axils","axled","axles","axons","ayahs", 
-  "womby", "loser","chirp","flung","fling","stead",
+  "aviso","avows","awned","axels","axile","axils","axled","axles","axons","ayahs"
 ]);
 
-
+// Combined valid set
 const VALID = new Set([...ANSWERS, ...EXTRA_VALID]);
 
-
+// ── CONSTANTS ──
 const ROWS = 6, COLS = 5;
 const KB_ROWS = [
   ['Q','W','E','R','T','Y','U','I','O','P'],
@@ -254,14 +256,14 @@ const KB_ROWS = [
   ['ENTER','Z','X','C','V','B','N','M','⌫']
 ];
 
-
+// ── STATE ──
 let answer = '';
 let guesses = [];
 let currentGuess = '';
 let gameOver = false;
 let currentRow = 0;
 
-
+// ── STATS ──
 function loadStats() {
   try {
     return JSON.parse(localStorage.getItem('cw_stats')) || defaultStats();
@@ -342,7 +344,7 @@ function handleKey(key) {
   }
 }
 
-
+// ── UPDATE CURRENT ROW DISPLAY ──
 function updateCurrentRow() {
   for (let c = 0; c < COLS; c++) {
     const tile = document.getElementById(`tile-${currentRow}-${c}`);
@@ -358,11 +360,11 @@ function evaluate(guess) {
   const ans = answer.split('');
   const g = guess.split('');
 
-  
+  // First pass: correct
   g.forEach((l, i) => {
     if (l === ans[i]) { result[i] = 'correct'; ans[i] = null; g[i] = null; }
   });
-
+  // Second pass: present
   g.forEach((l, i) => {
     if (l && ans.includes(l)) { result[i] = 'present'; ans[ans.indexOf(l)] = null; }
   });
@@ -478,7 +480,8 @@ function openResultModal(won) {
   document.getElementById('result-title').textContent = won ? '🎉 You Won!' : '😞 Game Over';
   const el = document.getElementById('result-answer');
   el.innerHTML = won ? '' : `The word was <strong>${answer.toUpperCase()}</strong>`;
-  document.getElementById('result-overlay').classList.add('open');
+  const modal = new bootstrap.Modal(document.getElementById('resultModal'));
+  modal.show();
 }
 
 // ── OPEN STATS MODAL ──
@@ -503,7 +506,8 @@ function openStatsModal() {
         </div>
       </div>`;
   });
-  document.getElementById('stats-overlay').classList.add('open');
+  const modal = new bootstrap.Modal(document.getElementById('statsModal'));
+  modal.show();
 }
 
 // ── EVENT LISTENERS ──
@@ -513,22 +517,37 @@ document.addEventListener('keydown', e => {
 });
 
 document.getElementById('stats-btn').addEventListener('click', openStatsModal);
-document.getElementById('stats-close').addEventListener('click', () =>
-  document.getElementById('stats-overlay').classList.remove('open'));
-document.getElementById('result-close').addEventListener('click', () =>
-  document.getElementById('result-overlay').classList.remove('open'));
+
 document.getElementById('see-stats-btn').addEventListener('click', () => {
-  document.getElementById('result-overlay').classList.remove('open');
-  openStatsModal();
+  bootstrap.Modal.getInstance(document.getElementById('resultModal')).hide();
+  setTimeout(() => openStatsModal(), 300);
 });
 
-document.getElementById('next-game-btn').addEventListener('click', resetGame);
-['stats-overlay','result-overlay'].forEach(id => {
-  document.getElementById(id).addEventListener('click', e => {
-    if (e.target.id === id) document.getElementById(id).classList.remove('open');
-  });
+document.getElementById('next-game-btn').addEventListener('click', () => {
+  bootstrap.Modal.getInstance(document.getElementById('resultModal')).hide();
+  setTimeout(() => resetGame(), 300);
 });
 
+// ── THEME TOGGLE ──
+function loadTheme() {
+  const saved = localStorage.getItem('cw_theme') || 'dark';
+  if (saved === 'light') {
+    document.body.classList.add('light');
+    document.getElementById('theme-btn').textContent = '☀️';
+  } else {
+    document.body.classList.remove('light');
+    document.getElementById('theme-btn').textContent = '🌙';
+  }
+}
+
+document.getElementById('theme-btn').addEventListener('click', () => {
+  const isLight = document.body.classList.toggle('light');
+  document.getElementById('theme-btn').textContent = isLight ? '☀️' : '🌙';
+  localStorage.setItem('cw_theme', isLight ? 'light' : 'dark');
+});
+
+// ── START GAME ──
+loadTheme();
 answer = getAnswer();
 buildBoard();
 buildKeyboard();
