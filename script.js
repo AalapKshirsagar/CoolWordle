@@ -1,4 +1,6 @@
 
+
+// -- wordlist
 const ANSWERS = [
   "cigar","rebut","sissy","humph","awake","bleed","kneed","grand","risen","reply",
   "alien","ramen","clink","hurry","beams","blade","timid","altar","arose","thump",
@@ -238,7 +240,8 @@ const EXTRA_VALID = new Set([
   "arsis","artel","artic","artis","ascus","aspen","aster","astir","atilt","atlas",
   "atman","atmos","atomy","atony","atopy","atria","audit","auger","aught","aulas",
   "aulos","aunts","aurae","aural","auras","auric","auris","avail","avens","avers",
-  "aviso","avows","awned","axels","axile","axils","axled","axles","axons","ayahs"
+  "aviso","avows","awned","axels","axile","axils","axled","axles","axons","ayahs",
+  "womby","chirp","stead","flung","fling","loser","aalap"
 ]);
 
 // Combined valid set
