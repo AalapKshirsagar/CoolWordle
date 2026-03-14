@@ -1,7 +1,7 @@
-🟩 CoolWordle
+🟩 ## CoolWordle
 A fully functional Wordle clone built with plain HTML, CSS and JavaScript — no frameworks, no installs, no terminal. Just open and play!
 
-🎮 How to Play
+🎮 ## How to Play
 
 Guess the hidden 5-letter word in 6 tries
 After each guess the tiles flip and show color hints:
@@ -11,7 +11,7 @@ ColorMeaning🟩 GreenCorrect letter, correct position🟨 YellowCorrect letter,
 Finish a game and hit ▶ Next Game to instantly play again with a new random word!
 
 
-✨ Features
+✨## Features
 
 🎲 Random word every game — 2300+ words from the NYT Wordle list
 🔄 Next Game button — no page refresh needed
@@ -23,18 +23,18 @@ Finish a game and hit ▶ Next Game to instantly play again with a new random wo
 🗂️ Guess distribution chart
 
 
-🛠️ Tech Stack
+🛠️ ## Tech Stack
 TechnologyStructureHTMLStylingCSSLogicVanilla JavaScript
 No Node.js. No npm. No frameworks. Just 3 files.
 
-🗂️ Project Structure
+   Project Structure
 coolwordle/
 ├── index.html   # Game structure & modals
 ├── style.css    # All styling & animations
 └── script.js    # Game logic + 2300+ word list
 
 
-📊 Stats Tracking
+📊 ## Stats Tracking
 Your stats are saved automatically in your browser's localStorage:
 
 Games played
