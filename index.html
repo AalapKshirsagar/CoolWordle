@@ -1,63 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CoolWordle</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
   <!-- HEADER -->
-  <header>
-    <div style="width:40px"></div>
-    <h1>CoolWordle</h1>
-    <button id="stats-btn" title="Statistics">📊</button>
+  <header class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom border-secondary">
+    <button id="theme-btn" class="btn btn-link p-1 fs-4" title="Toggle theme">🌙</button>
+    <h1 class="header-title mb-0">CoolWordle</h1>
+    <button id="stats-btn" class="btn btn-link p-1 fs-4" title="Statistics">📊</button>
   </header>
-
   <!-- TOAST -->
   <div id="toast"></div>
 
   <!-- BOARD -->
-  <div id="board"></div>
+  <div class="d-flex justify-content-center">
+    <div id="board"></div>
+  </div>
 
   <!-- KEYBOARD -->
-  <div id="keyboard">
-    <div class="kb-row" id="kb-row-0"></div>
-    <div class="kb-row" id="kb-row-1"></div>
-    <div class="kb-row" id="kb-row-2"></div>
+  <div class="d-flex justify-content-center">
+    <div id="keyboard" class="w-100">
+      <div class="kb-row d-flex justify-content-center gap-1 mb-1" id="kb-row-0"></div>
+      <div class="kb-row d-flex justify-content-center gap-1 mb-1" id="kb-row-1"></div>
+      <div class="kb-row d-flex justify-content-center gap-1 mb-1" id="kb-row-2"></div>
+    </div>
   </div>
 
   <!-- RESULT MODAL -->
-  <div class="overlay" id="result-overlay">
-    <div class="modal">
-      <button class="modal-close" id="result-close">✕</button>
-      <h2 id="result-title"></h2>
-      <p id="result-answer"></p>
-      <div class="modal-buttons">
-        <button id="see-stats-btn">📊 Stats</button>
-        <button id="next-game-btn">▶ Next Game</button>
+  <div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white border border-secondary rounded-4">
+        <div class="modal-body text-center py-4 px-4">
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+          <h2 class="modal-title-text mb-2" id="result-title"></h2>
+          <p id="result-answer" class="text-secondary mb-4"></p>
+          <div class="d-flex gap-2 justify-content-center">
+            <button id="see-stats-btn" class="btn btn-secondary px-4 py-2 fw-bold">📊 Stats</button>
+            <button id="next-game-btn" class="btn btn-success px-4 py-2 fw-bold">▶ Next Game</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- STATS MODAL -->
-  <div class="overlay" id="stats-overlay">
-    <div class="modal" id="stats-modal">
-      <button class="modal-close" id="stats-close">✕</button>
-      <h2>Statistics</h2>
-      <div class="stats-grid">
-        <div class="stat"><span class="stat-num" id="s-played">0</span><span class="stat-lbl">Played</span></div>
-        <div class="stat"><span class="stat-num" id="s-winrate">0</span><span class="stat-lbl">Win %</span></div>
-        <div class="stat"><span class="stat-num" id="s-streak">0</span><span class="stat-lbl">Current Streak</span></div>
-        <div class="stat"><span class="stat-num" id="s-maxstreak">0</span><span class="stat-lbl">Max Streak</span></div>
+  <div class="modal fade" id="statsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white border border-secondary rounded-4">
+        <div class="modal-body py-4 px-4">
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+          <h2 class="modal-title-text text-center mb-4">Statistics</h2>
+
+          <!-- Stats grid -->
+          <div class="row text-center mb-4 g-2">
+            <div class="col-3">
+              <div class="stat-num" id="s-played">0</div>
+              <div class="stat-lbl">Played</div>
+            </div>
+            <div class="col-3">
+              <div class="stat-num" id="s-winrate">0</div>
+              <div class="stat-lbl">Win %</div>
+            </div>
+            <div class="col-3">
+              <div class="stat-num" id="s-streak">0</div>
+              <div class="stat-lbl">Streak</div>
+            </div>
+            <div class="col-3">
+              <div class="stat-num" id="s-maxstreak">0</div>
+              <div class="stat-lbl">Max</div>
+            </div>
+          </div>
+
+          <!-- Distribution -->
+          <p class="dist-title text-center text-secondary mb-3">GUESS DISTRIBUTION</p>
+          <div id="distribution"></div>
+        </div>
       </div>
-      <p class="dist-title">Guess Distribution</p>
-      <div id="distribution"></div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
