@@ -1,8 +1,5 @@
-// ─────────────────────────────────────────────
-// COOLWORDLE — script.js
-// ─────────────────────────────────────────────
 
-// ── FULL NYT WORDLE ANSWER WORD LIST (2309 words) ──
+// ── List of words
 const ANSWERS = [
   "cigar","rebut","sissy","humph","awake","bleed","kneed","grand","risen","reply",
   "alien","ramen","clink","hurry","beams","blade","timid","altar","arose","thump",
@@ -246,10 +243,10 @@ const EXTRA_VALID = new Set([
   "womby", "loser","chirp","flung","fling","stead",
 ]);
 
-// Combined valid set
+
 const VALID = new Set([...ANSWERS, ...EXTRA_VALID]);
 
-// ── CONSTANTS ──
+
 const ROWS = 6, COLS = 5;
 const KB_ROWS = [
   ['Q','W','E','R','T','Y','U','I','O','P'],
@@ -257,14 +254,14 @@ const KB_ROWS = [
   ['ENTER','Z','X','C','V','B','N','M','⌫']
 ];
 
-// ── STATE ──
+
 let answer = '';
 let guesses = [];
 let currentGuess = '';
 let gameOver = false;
 let currentRow = 0;
 
-// ── STATS ──
+
 function loadStats() {
   try {
     return JSON.parse(localStorage.getItem('cw_stats')) || defaultStats();
@@ -345,7 +342,7 @@ function handleKey(key) {
   }
 }
 
-// ── UPDATE CURRENT ROW DISPLAY ──
+
 function updateCurrentRow() {
   for (let c = 0; c < COLS; c++) {
     const tile = document.getElementById(`tile-${currentRow}-${c}`);
@@ -361,11 +358,11 @@ function evaluate(guess) {
   const ans = answer.split('');
   const g = guess.split('');
 
-  // First pass: correct
+  
   g.forEach((l, i) => {
     if (l === ans[i]) { result[i] = 'correct'; ans[i] = null; g[i] = null; }
   });
-  // Second pass: present
+
   g.forEach((l, i) => {
     if (l && ans.includes(l)) { result[i] = 'present'; ans[ans.indexOf(l)] = null; }
   });
