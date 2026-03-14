@@ -1,8 +1,4 @@
-// ─────────────────────────────────────────────
-// COOLWORDLE — script.js
-// ─────────────────────────────────────────────
 
-// ── FULL NYT WORDLE ANSWER WORD LIST (2309 words) ──
 const ANSWERS = [
   "cigar","rebut","sissy","humph","awake","bleed","kneed","grand","risen","reply",
   "alien","ramen","clink","hurry","beams","blade","timid","altar","arose","thump",
