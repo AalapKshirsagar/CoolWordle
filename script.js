@@ -1,8 +1,4 @@
-// ─────────────────────────────────────────────
-// COOLWORDLE — script.js
-// ─────────────────────────────────────────────
-
-// ── FULL NYT WORDLE ANSWER WORD LIST (2309 words) ──
+// - WoordList
 const ANSWERS = [
   "womby","aalap","loser",
   "cigar","rebut","sissy","humph","awake","bleed","kneed","grand","risen","reply",
